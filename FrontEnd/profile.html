@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Management - Bookkeeping App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('profileSelect').addEventListener('change', selectProfile);
+            document.getElementById('newProfileForm').addEventListener('submit', createProfile);
+        });
+
+        function createProfile(event) {
+            event.preventDefault();
+            var newProfileName = document.getElementById('newProfileName').value;
+            
+            if (newProfileName.trim() === '') {
+                alert('Profile name cannot be empty.');
+                return;
+            }
+
+            var select = document.getElementById('profileSelect');
+            var option = new Option(newProfileName, newProfileName);
+            select.add(option);
+
+            // Reset form
+            document.getElementById('newProfileForm').reset();
+            alert('Profile created successfully!');
+        }
+
+        function deleteProfile() {
+            var select = document.getElementById('profileSelect');
+            if (select.selectedIndex > 0) {
+                select.remove(select.selectedIndex);
+                alert('Profile deleted successfully.');
+            } else {
+                alert('Please select a profile to delete.');
+            }
+        }
+
+        function selectProfile() {
+            var select = document.getElementById('profileSelect');
+            if (select.value !== 'Please select') {
+                window.location.href = 'dashboard.html';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col text-right">
+                <a href="settings.html" title="Settings">
+                    <i class="bi bi-gear" style="font-size: 2rem;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="my-4">Profile Management</h1>
+        <div class="form-group">
+            <label for="profileSelect">Select Profile</label>
+            <select class="form-control" id="profileSelect">
+                <option>Please select</option>
+                <!-- Predefined or dynamically added profiles will go here -->
+            </select>
+        </div>
+        <button class="btn btn-danger mb-3" onclick="deleteProfile()">Delete Selected Profile</button>
+        <hr>
+        <h2>Create a New Profile</h2>
+        <form id="newProfileForm">
+            <div class="form-group">
+                <label for="newProfileName">Profile Name</label>
+                <input type="text" class="form-control" id="newProfileName" placeholder="e.g., Emergency Fund" required>
+            </div>
+            <button type="submit" class="btn btn-success">Create Profile</button>
+        </form>
+    </div>
+</body>
+</html>

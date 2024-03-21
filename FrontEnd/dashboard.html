@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Bookkeeping App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+
+            // Show the selected tab
+            var selectedTab = document.getElementById(tabName);
+            selectedTab.style.display = 'block';
+        }
+
+        function addEntryToTable(tabName) {
+            var date = document.querySelector(`#${tabName} .entry-date`).value;
+            var description = document.querySelector(`#${tabName} .entry-description`).value;
+            var account = document.querySelector(`#${tabName} .entry-account`).value;
+            var category = document.querySelector(`#${tabName} .entry-category`).value;
+            var amount = document.querySelector(`#${tabName} .entry-amount`).value;
+
+            if (date && description && account && category && amount) {
+                var tableBody = document.querySelector(`#${tabName} .table tbody`);
+                var newRow = tableBody.insertRow();
+                newRow.innerHTML = `
+                    <td>${date}</td>
+                    <td>${description}</td>
+                    <td>${account}</td>
+                    <td>${category}</td>
+                    <td>${amount}</td>
+                    <td><button class="btn btn-danger" onclick="deleteRow(this)">Delete</button></td>
+                `;
+
+                // Reset the form inputs
+                document.querySelector(`#${tabName} .entry-form`).reset();
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+
+        function deleteRow(btn) {
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row mb-3">
+            <div class="col">
+                <h2>Dashboard</h2>
+            </div>
+            <div class="col text-right">
+                <a href="settings.html" title="Settings">
+                    <i class="bi bi-gear" style="font-size: 2rem;"></i>
+                </a>
+            </div>
+        </div>
+
+    <div class="container mt-5">
+        <h2>Dashboard</h2>
+        <div class="btn-group mb-3">
+            <button onclick="switchTab('Transactions')" class="btn btn-primary">Transactions</button>
+            <button onclick="switchTab('Income')" class="btn btn-primary">Income</button>
+            <button onclick="switchTab('Budget')" class="btn btn-primary">Budget</button>
+            <button onclick="switchTab('Analytics')" class="btn btn-primary">Analytics</button>
+        </div>
+
+        <!-- Transactions Tab -->
+        <div id="Transactions" class="tab-content">
+            <h3>Transactions</h3>
+            <form class="entry-form" onsubmit="event.preventDefault(); addEntryToTable('Transactions');">
+                <input class="entry-date" type="date" required>
+                <input class="entry-description" type="text" placeholder="Description" required>
+                <input class="entry-account" type="text" placeholder="Account" required>
+                <input class="entry-category" type="text" placeholder="Category" required>
+                <input class="entry-amount" type="number" placeholder="Amount" required>
+                <button type="submit" class="btn btn-success">Add Transaction</button>
+            </form>
+            <!-- Table for Transactions -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Account</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Income Tab -->
+        <div id="Income" class="tab-content" style="display: none;">
+            <h3>Income</h3>
+            <form class="entry-form" onsubmit="event.preventDefault(); addEntryToTable('Income');">
+                <input class="entry-date" type="date" required>
+                <input class="entry-description" type="text" placeholder="Description" required>
+                <input class="entry-account" type="text" placeholder="Account" required>
+                <input class="entry-category" type="text" placeholder="Category" required>
+                <input class="entry-amount" type="number" placeholder="Amount" required>
+                <button type="submit" class="btn btn-success">Add Income</button>
+            </form>
+            <!-- Table for Income -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Account</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="Budget" class="tab-content" style="display: none;">
+            <h3>Budget</h3>
+            <!-- Content for Budget will go here -->
+        </div>
+
+        <!-- Analytics Tab (empty for now) -->
+        <div id="Analytics" class="tab-content" style="display: none;">
+            <h3>Analytics</h3>
+            <!-- Content for Analytics will go here -->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Bookkeeping App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function changeTheme(color) {
+            document.body.className = ''; // reset any existing class
+            document.body.classList.add(color);
+        }
+
+        // Add any other functions you need for additional settings
+    </script>
+    <style>
+        /* Add custom styles for dark mode and color themes */
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .blue-theme {
+            background-color: #D0E0FC;
+            color: #000000;
+        }
+        .green-theme {
+            background-color: #E2F0CB;
+            color: #000000;
+        }
+        /* Styles for color-blindness can be added as needed */
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Settings</h2>
+
+        <!-- Toggle for Dark Mode -->
+        <div>
+            <label for="darkModeToggle">Dark Mode:</label>
+            <input type="checkbox" id="darkModeToggle" onclick="toggleMode()">
+        </div>
+
+        <!-- Color Theme Selection -->
+        <div>
+            <label>Color Theme:</label>
+            <button class="btn btn-primary" onclick="changeTheme('blue-theme')">Blue</button>
+            <button class="btn btn-success" onclick="changeTheme('green-theme')">Green</button>
+            <!-- More buttons for other themes -->
+        </div>
+
+        <!-- Additional settings can be added here -->
+
+    </div>
+</body>
+</html>

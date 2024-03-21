@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Bookkeeping App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #loginButton {
+            display: none; /* Initially hide the login button */
+        }
+    </style>
+    <script>
+        function registerUser(event) {
+            event.preventDefault(); // Prevent the form from submitting in the traditional way
+            
+            // Normally, you'd send the form data to your server here
+            // For demonstration, simulate a successful registration
+            alert('Registration successful!');
+            
+            // Show the login button after successful registration
+            document.getElementById('loginButton').style.display = 'inline-block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Register</h2>
+        <form onsubmit="registerUser(event)">
+            <input type="text" placeholder="Email" required class="form-control mb-2">
+            <input type="password" placeholder="Password" required class="form-control mb-2">
+            <input type="password" placeholder="Confirm Password" required class="form-control mb-2">
+            <button type="submit" class="btn btn-success">Register</button>
+            <!-- Login Button; initially hidden, shown after successful registration -->
+            <a href="index.html" id="loginButton" class="btn btn-primary ml-2">Login</a>
+        </form>
+    </div>
+</body>
+</html>
